@@ -3,33 +3,28 @@
 A runnable reference for **grounding Claude in fresh and document sources, with provenance**: one
 small, correct demo of each grounding tool, in one repo. Grounding means putting real content into
 the model's context and getting the source spans back, so the answer is cited rather than recalled.
-Every demo runs offline by default and prints the exact request shape. Add `--live` to make the
-real call.
+Every demo makes a real API call.
 
 ```bash
 pip install -r requirements.txt
 
-python run.py                              # offline: every demo, as a dry run
-python run.py citations                    # one demo, dry run
-ANTHROPIC_API_KEY=... python run.py citations --live   # one demo, real call
+ANTHROPIC_API_KEY=... python run.py                # every demo, real calls
+ANTHROPIC_API_KEY=... python run.py citations      # one demo, real call
 ```
 
-## A note on honesty
-
-This is a standalone reference repo, a bonus alongside the six `claude-startup-*` repos, not one
-of them. Every demo uses a current, shipped request shape (the web tools are the `_20260209`
-versions). The offline run prints `[dry]` on every line it simulates. `web_search`, `citations`,
-and `files` have real `--live` paths. `web_fetch` is shown as a dry shape only, because a live
-fetch needs a specific reachable URL, and the call shape is identical to `web_search`.
+This is a real tool. Every run calls the Anthropic API, so `ANTHROPIC_API_KEY` is required. Without
+a key it fails fast with a clear error and a non-zero exit. There is no offline mode and no fallback.
 
 ## The tools
 
-| Tool | What the demo shows |
+Every tool uses a current, shipped request shape (the web tools are the `_20260209` versions).
+
+| Tool | What the demo does |
 |---|---|
-| `web_search` | server-side web search on Anthropic infra, with citations, `web_search_20260209` |
-| `web_fetch` | server-side fetch of a specific URL, `web_fetch_20260209`, same dynamic filtering |
-| `citations` | a document block with citations enabled, and the source spans returned on the answer |
-| `files` | upload once with the Files API, reference by `file_id`, no re-upload across requests |
+| `web_search` | runs server-side web search (`web_search_20260209`), reports the server tool fired |
+| `web_fetch` | fetches a specific URL server-side (`web_fetch_20260209`), reports the server tool fired |
+| `citations` | sends a document with citations enabled, reports the source spans returned on the answer |
+| `files` | uploads a file with the Files API, references it by `file_id`, then deletes it |
 
 The repo also ships a `verify` skill and a Stop hook under `.claude/`, which is the skills and
 hooks feature demonstrating itself.
@@ -44,9 +39,9 @@ chain is what turns a plausible answer into a sourced one.
 
 ```
 context_grounding/
-  client.py    # the client, or None for the offline dry run, and model routing
+  client.py    # the real client, key required, and model routing
   demos.py     # one function per tool, plus the registry
-run.py         # one-command entry: all tools, or one, dry or --live
+run.py         # one-command entry: all tools, or one, all live
 scripts/       # the self-contained deslop gate for CI
 .claude/       # the verify skill and the Stop hook (skills + hooks, demonstrated)
 ```

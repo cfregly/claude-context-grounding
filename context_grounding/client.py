@@ -1,8 +1,8 @@
 """Anthropic client and model routing.
 
-Demos default to Haiku for cheap calls and Opus where the feature wants a frontier model. Going
-live is opt-in: `get_client` returns None unless a demo is run with `--live`, so no run spends a
-token by accident.
+This is a real tool. Every run calls the Anthropic API, so ANTHROPIC_API_KEY is required. If the
+key is missing, the run fails fast with a clear error and a non-zero exit. There is no offline
+mode and no fallback.
 """
 
 import os
@@ -11,15 +11,18 @@ FAST_MODEL = "claude-haiku-4-5"
 MAIN_MODEL = "claude-opus-4-8"
 
 
-def key_present() -> bool:
-    return bool(os.environ.get("ANTHROPIC_API_KEY"))
+def require_key() -> None:
+    """Raise immediately if ANTHROPIC_API_KEY is missing, so the run fails fast."""
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        raise RuntimeError(
+            "ANTHROPIC_API_KEY is required. Set it in the environment, then run "
+            "`ANTHROPIC_API_KEY=... python run.py`."
+        )
 
 
-def get_client(live: bool = False):
-    if not live:
-        return None
-    if not key_present():
-        raise RuntimeError("live mode needs ANTHROPIC_API_KEY in the environment")
+def get_client():
+    """Return a real Anthropic client. Fails fast if the key is missing."""
+    require_key()
     import anthropic
 
     return anthropic.Anthropic()
