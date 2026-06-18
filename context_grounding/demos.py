@@ -46,7 +46,7 @@ def citations(client):
 def files(client):
     """Upload a file via the Files API, reference it by file_id, then delete it."""
     with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False) as fh:
-        fh.write("hello from claude-context-grounding")
+        fh.write("hello from claude-grounding")
         path = fh.name
     try:
         uploaded = client.beta.files.upload(file=Path(path))

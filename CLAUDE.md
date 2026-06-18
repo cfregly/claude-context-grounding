@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Conventions for any agent working on `claude-context-grounding`. Read this first.
+Conventions for any agent working on `claude-grounding`. Read this first.
 
 ## What this is
 
@@ -8,8 +8,8 @@ A runnable reference for grounding Claude in fresh and document sources, with pr
 small, correct demo of each grounding tool, in one repo. Server-side web search, server-side web
 fetch, document citations, and the Files API. Each demo makes a real API call.
 
-This is a standalone reference repo, a bonus alongside the six `claude-startup-*` repos, not one of
-them. The web tools track the current `_20260209` versions.
+This is a standalone platform deep-dive beside `claude-founder-kit`, not a stage module inside the
+main kit. The web tools track the current `_20260209` versions.
 
 ## Run it
 

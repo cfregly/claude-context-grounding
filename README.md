@@ -1,4 +1,7 @@
-# claude-context-grounding
+# claude-grounding
+
+[![ci](https://github.com/cfregly/claude-grounding/actions/workflows/ci.yml/badge.svg)](https://github.com/cfregly/claude-grounding/actions/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 A runnable reference for **grounding Claude in fresh and document sources, with provenance**: one
 small, correct demo of each grounding tool, in one repo. Grounding means putting real content into
@@ -6,6 +9,8 @@ the model's context and getting the source spans back, so the answer is cited ra
 Every demo makes a real API call.
 
 ```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 
 ANTHROPIC_API_KEY=... python run.py                # every demo, real calls
@@ -14,6 +19,14 @@ ANTHROPIC_API_KEY=... python run.py citations      # one demo, real call
 
 This is a real tool. Every run calls the Anthropic API, so `ANTHROPIC_API_KEY` is required. Without
 a key it fails fast with a clear error and a non-zero exit. There is no offline mode and no fallback.
+
+## Verify it
+
+```bash
+python scripts/deslop_check.py
+python -m compileall context_grounding run.py scripts
+env -u ANTHROPIC_API_KEY python run.py  # should fail fast, non-zero
+```
 
 ## The tools
 
