@@ -25,6 +25,7 @@ a key it fails fast with a clear error and a non-zero exit. There is no offline 
 ```bash
 python scripts/deslop_check.py
 python -m compileall context_grounding run.py scripts
+python -m unittest discover -s tests -q
 env -u ANTHROPIC_API_KEY PYTHON_DOTENV_DISABLED=1 python run.py  # should fail fast, non-zero
 ```
 
@@ -55,6 +56,7 @@ context_grounding/
   client.py    # the real client, key required, and model routing
   demos.py     # one function per tool, plus the registry
 run.py         # one-command entry: all tools, or one, all live
+tests/         # offline parser tests
 scripts/       # the self-contained deslop gate for CI
 .claude/       # the verify skill and the Stop hook (skills + hooks, demonstrated)
 ```

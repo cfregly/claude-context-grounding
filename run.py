@@ -9,6 +9,7 @@ with a clear error and a non-zero exit. After a run it writes a receipt to data/
 which the Stop hook checks before it lets an agent stop.
 """
 
+import argparse
 import sys
 from pathlib import Path
 
@@ -18,8 +19,22 @@ from context_grounding.demos import REGISTRY
 RECEIPT = Path(__file__).resolve().parent / "data" / "last_run.md"
 
 
-def _names(argv):
-    return [a for a in argv if not a.startswith("-")]
+def parse_args(argv):
+    parser = argparse.ArgumentParser(
+        prog="run",
+        description="Run one or all grounding demos against the live Anthropic API.",
+    )
+    parser.add_argument(
+        "demos",
+        nargs="*",
+        metavar="demo",
+        help="demo name: " + ", ".join(REGISTRY),
+    )
+    args = parser.parse_args(argv)
+    unknown = [n for n in args.demos if n not in REGISTRY]
+    if unknown:
+        parser.error("unknown demo(s): " + ", ".join(unknown) + ". available: " + ", ".join(REGISTRY))
+    return args
 
 
 def _write_receipt(selected):
@@ -29,19 +44,13 @@ def _write_receipt(selected):
 
 
 def main(argv):
+    args = parse_args(argv)
+    selected = args.demos or list(REGISTRY)
     try:
         require_key()
     except RuntimeError as e:
         print(f"error: {e}", file=sys.stderr)
         return 1
-
-    names = _names(argv)
-    unknown = [n for n in names if n not in REGISTRY]
-    if unknown:
-        print("unknown demo(s): " + ", ".join(unknown))
-        print("available: " + ", ".join(REGISTRY))
-        return 2
-    selected = names or list(REGISTRY)
 
     client = get_client()
     for name in selected:

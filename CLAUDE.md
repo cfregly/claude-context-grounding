@@ -27,5 +27,6 @@ main kit. The web tools track the current `_20260209` versions.
 - Claim only what runs. Each demo reports what the real response carried (the server tool fired,
   the citation spans, the uploaded file id). The `files` demo deletes the file it uploads.
 - Prose is deslop-clean: no em-dashes, no en-dashes, no semicolons, no buzzwords. CI runs the
-  deslop gate on the README and this file, a compile check, and a fail-fast-without-a-key check.
+  deslop gate on the README and this file, a compile check, offline parser tests, and a
+  fail-fast-without-a-key check.
 - Never commit a key. `.env` stays git-ignored.
