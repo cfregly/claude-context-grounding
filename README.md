@@ -25,7 +25,7 @@ a key it fails fast with a clear error and a non-zero exit. There is no offline 
 ```bash
 python scripts/deslop_check.py
 python -m compileall context_grounding run.py scripts
-env -u ANTHROPIC_API_KEY python run.py  # should fail fast, non-zero
+env -u ANTHROPIC_API_KEY PYTHON_DOTENV_DISABLED=1 python run.py  # should fail fast, non-zero
 ```
 
 ## The tools
