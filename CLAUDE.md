@@ -9,7 +9,7 @@ small, correct demo of each grounding tool, in one repo. Server-side web search,
 fetch, document citations, and the Files API. Each demo makes a real API call.
 
 This is a standalone platform deep-dive beside `claude-founder-kit`, not a stage module inside the
-main kit. The web tools track the current `_20260209` versions.
+main kit. The web tools track the current versions: web search `_20260209`, web fetch `_20260309`.
 
 ## Run it
 
@@ -22,7 +22,7 @@ main kit. The web tools track the current `_20260209` versions.
 - Key required, fail fast. Every run calls the real Anthropic API, so `ANTHROPIC_API_KEY` is
   required. Without a key the run fails fast with a clear error and a non-zero exit. There is no
   offline mode and no fallback.
-- Shapes are current, not invented. The web tools are `web_search_20260209` and `web_fetch_20260209`.
+- Shapes are current, not invented. The web tools are `web_search_20260209` and `web_fetch_20260309`.
   If a tool version moves, fix the shape rather than guess.
 - Claim only what runs. Each demo reports what the real response carried (the server tool fired,
   the citation spans, the uploaded file id). The `files` demo deletes the file it uploads.

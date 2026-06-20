@@ -31,12 +31,12 @@ env -u ANTHROPIC_API_KEY PYTHON_DOTENV_DISABLED=1 python run.py  # should fail f
 
 ## The tools
 
-Every tool uses a current, shipped request shape (the web tools are the `_20260209` versions).
+Every tool uses a current, shipped request shape: web search `_20260209`, web fetch `_20260309`, the latest versions the API accepts.
 
 | Tool | What the demo does |
 |---|---|
 | `web_search` | runs server-side web search (`web_search_20260209`), reports the server tool fired |
-| `web_fetch` | fetches a specific URL server-side (`web_fetch_20260209`), reports the server tool fired |
+| `web_fetch` | fetches a specific URL server-side (`web_fetch_20260309`), reports the server tool fired |
 | `citations` | sends a document with citations enabled, reports the source spans returned on the answer |
 | `files` | uploads a file with the Files API, references it by `file_id`, then deletes it |
 

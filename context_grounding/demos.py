@@ -23,7 +23,7 @@ def web_search(client):
 def web_fetch(client):
     """Server-side fetch of a specific URL into context, on Anthropic infra, with the same dynamic filtering."""
     r = client.messages.create(model=MAIN_MODEL, max_tokens=512,
-                               tools=[{"type": "web_fetch_20260209", "name": "web_fetch"}],
+                               tools=[{"type": "web_fetch_20260309", "name": "web_fetch"}],
                                messages=[{"role": "user", "content": (
                                    "Fetch https://docs.claude.com/en/docs/about-claude/models and name "
                                    "one Claude model you find on that page.")}])
