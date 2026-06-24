@@ -20,6 +20,9 @@ ANTHROPIC_API_KEY=... python run.py citations      # one demo, real call
 This is a real tool. Every run calls the Anthropic API, so `ANTHROPIC_API_KEY` is required. Without
 a key it fails fast with a clear error and a non-zero exit. There is no offline mode and no fallback.
 
+The value bar is adversarially-confirmed to add value. A grounding claim is shippable only when the
+source, baseline or failure mode, skeptical check, and receipt-backed value survive review.
+
 ## Verify it
 
 ```bash
