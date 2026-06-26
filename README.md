@@ -32,6 +32,9 @@ python -m unittest discover -s tests -q
 env -u ANTHROPIC_API_KEY PYTHON_DOTENV_DISABLED=1 python run.py  # should fail fast, non-zero
 ```
 
+Confirmed improvements are tracked in [docs/confirmed-improvements.md](docs/confirmed-improvements.md).
+The current status is candidate.
+
 ## The tools
 
 Every tool uses a current, shipped request shape: web search `_20260209`, web fetch `_20260309`, the latest versions the API accepts.

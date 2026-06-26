@@ -29,6 +29,8 @@ main kit. The web tools track the current versions: web search `_20260209`, web 
 - Apply the value bar. A grounding claim is promoted only when it is adversarially-confirmed to add value:
   it names the source, the baseline or failure mode, the skeptical check, and the receipt-backed
   value of using grounding instead of recall.
+- Keep `docs/confirmed-improvements.md` current. If a run does not clear the value bar, keep it as
+  candidate evidence instead of promoting it.
 - Prose is deslop-clean: no em-dashes, no en-dashes, no semicolons, no buzzwords. CI runs the
   deslop gate on the README and this file, a compile check, offline parser tests, and a
   fail-fast-without-a-key check.
